@@ -1,0 +1,15 @@
+{
+  "name": "parted-talk-literary-websockets",
+  "version": "1.0.0",
+  "description": "Websockets server for pariveda TED talk",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node index.js"
+  },
+  "author": "Ryan Hammond",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2"
+  }
+}
