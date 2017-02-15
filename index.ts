@@ -16,6 +16,7 @@ io.on('connection', function(socket){
   let user = manager.addUser(socket.client.id);
   socket.emit('connId', socket.client.id);
   socket.emit('initialUsers', manager.getUserNames());
+  socket.emit('initialMessages', manager.messages);
 
   socket.on('user-name', function(name){
     console.log('user-name: ' + name);
@@ -26,10 +27,12 @@ io.on('connection', function(socket){
   socket.on('new-line', function(line){
     console.log('message: ' + line);
     io.emit('newMessage', line);
+    manager.addMessage(line);
     messageCount++;
 
     if(messageCount >= 75){
       io.emit('clearScreen', true);
+      manager.clearMessages();
       messageCount = 0;
     }
   });

@@ -2,6 +2,7 @@ import { User } from './user';
 
 export class UserManager{
     public users: { [userId:string]: User; } = {};
+    public messages: string[] = [];
 
     constructor(){}
 
@@ -24,5 +25,13 @@ export class UserManager{
             userNames.push({"name": this.users[userId].name, "id": userId});
         }
         return userNames;
+    }
+
+    public addMessage(message: string){
+        this.messages.push(message);
+    }
+
+    public clearMessages(){
+        this.messages = [];
     }
 }
