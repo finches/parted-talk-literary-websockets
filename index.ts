@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 let manager = new UserManager();
+let messageCount: number = 0;
 
 http.listen(4001, function(){
 	  console.log('listening on *:4001');
@@ -24,6 +25,13 @@ io.on('connection', function(socket){
 
   socket.on('new-line', function(line){
     console.log('message: ' + line);
+    io.emit('newMessage', line);
+    messageCount++;
+
+    if(messageCount >= 75){
+      io.emit('clearScreen', true);
+      messageCount = 0;
+    }
   });
 
   socket.on('disconnect', function(){
